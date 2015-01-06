@@ -1,12 +1,12 @@
-var quizTemplate = _.template(
-  "Quizzes: <% _.forEach(content, function(e) { %>"
-  + "<h1><%= e.title %></h1>"
-  + "<% }) %>"
+var menuTemplate = _.template(
+  "<% _.forEach(content, function(e) { %>" +
+    "<li><%= e.title %></li>" +
+  "<% }) %>"
 );
 
 $(function() {
   $.get("/quizzes", function(data) {
-    var compiled = quizTemplate({content: data});
-    $('.quizzes-display').append(compiled);
+    var compiled = menuTemplate({content: data});
+    $('#menu').append(compiled);
   });
 });
