@@ -16,3 +16,17 @@
 <div id="quizzes-display">
   
 </div>
+
+<script type="text/template" class="question-template">
+  <ol>
+    <%% _.forEach(content, function(data) { %>
+      <li><%%= data.question %></li>
+      <ul class='choices-block'>
+        <%% var options = data.choices.split(';') %>
+        <%% options.forEach(function(option, index) { %>
+          <li><input type='radio' name='question-<%%= data.id %>' value='<%% option %>' id='question-<%%= data.id %>-choice-<%%= index %>'><label for='question-<%%= data.id %>-choice-<%%= index %>'><%%= option %></label></li>
+        <%% }) %>
+      </ul>
+    <%% }) %>
+  </ol>
+</script>
