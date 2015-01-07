@@ -5,28 +5,31 @@
 </style>
 <h2>Quizzy Quiz</h2>
 
-<h4>PICK A QUIZ:</h4>
+<h3>PICK A QUIZ:</h3>
 
 <div class="menu-display">
   <ol id="menu">
   </ol>
 </div>
 
-<h4>YO QUIZ GOT QUESTIONS:</h4>
 <div id="quizzes-display">
   
 </div>
 
 <script type="text/template" class="question-template">
-  <ol>
-    <%% _.forEach(content, function(data) { %>
-      <li><%%= data.question %></li>
-      <ul class='choices-block'>
-        <%% var options = data.choices.split(';') %>
-        <%% options.forEach(function(option, index) { %>
-          <li><input type='radio' name='question-<%%= data.id %>' value='<%% option %>' id='question-<%%= data.id %>-choice-<%%= index %>'><label for='question-<%%= data.id %>-choice-<%%= index %>'><%%= option %></label></li>
-        <%% }) %>
-      </ul>
-    <%% }) %>
-  </ol>
+  <h3><%%= content[questionIterator].id %>: <%%= content[questionIterator].question %></h3>
+  <form id='form-submit' data-quizID="<%%= quizID %>" data-questioniterator="<%%= questionIterator %>" data-questionID="<%%= content[questionIterator].id %>" data-lastquestionid="<%%= content.length %>">
+    <ul class='choices-block'>
+      <%% var options = content[questionIterator].choices.split(';') %>
+      <%% options.forEach(function(option, index) { %>
+        <%% var uniqueID = "question-" + content[questionIterator].id + "-choice-" + index %>
+        <li><input type='radio' name='question-<%%= content[questionIterator].id %>' value='<%%= option %>' id='<%%= uniqueID %>'><label for='<%%= uniqueID %>'><%%= option %></label></li>
+      <%% }) %>
+    </ul>
+    <br><input type='submit' id='question-submit'>
+  </form>
+</script>
+
+<script type="text/template" class="answer-template">
+  <h1><%%= result %></h1>
 </script>
