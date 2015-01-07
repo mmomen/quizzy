@@ -23,11 +23,11 @@ $(document).on('submit', '#form-submit', function(e) {
   var checkAnswerURL = "/quizzes/" + quizID + "/questions/" + questionID + "/check?answer=" + selected;
   
   $.get(checkAnswerURL, function(data) {
-    console.log("before: " + score);
+    // console.log("before: " + score);
     if (data.correct === true) {
       score++;
     }
-    console.log("after: " + score);
+    // console.log("after: " + score);
     var answerSource = $('.answer-template').html();
     var answerTemplate = _.template(answerSource);
     var compiledAnswerTemplate = answerTemplate({result: data.correct});
@@ -35,18 +35,20 @@ $(document).on('submit', '#form-submit', function(e) {
     $('#quizzes-display').empty();
     $('#quizzes-display').append($elAnswer);
     if (questionID === lastQuestionID) {
-      console.log('that was the last question, your score: ' + score);
+      // console.log('that was the last question, your score: ' + score);
       var scoreSource = "<h1>YO SCORE BE: <%= ttt %></h1>";
       var scoreTemplate = _.template(scoreSource);
       var compiledScoreTemplate = scoreTemplate({ttt: score});
-      console.log(compiledScoreTemplate);
       var $elScore = $(compiledScoreTemplate);
-      $('#quizzes-display').empty();
-      $('#quizzes-display').append($elScore);
+      setTimeout(function() {
+        $('#quizzes-display').empty();
+        $('#quizzes-display').append($elScore);
+      }, 1000);
     } else {
       questionIterator++;
-      console.log('fff');
+      // console.log('fff');
       setTimeout(function() {
+        // getQuestion(quizID, questionIterator, score);
         getQuestion(quizID, questionIterator, score);
       }, 1000);
     }
