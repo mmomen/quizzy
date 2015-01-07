@@ -18,27 +18,39 @@ $(document).on('submit', '#form-submit', function(e) {
   var questionIterator = $(this).data("questioniterator");
   var questionID = $(this).data("questionid");
   var lastQuestionID = $(this).data("lastquestionid");
+  var score = $(this).data("score");
+
   var checkAnswerURL = "/quizzes/" + quizID + "/questions/" + questionID + "/check?answer=" + selected;
   
   $.get(checkAnswerURL, function(data) {
-    var source = $('.answer-template').html();
-    var answerTemplate = _.template(source);
+    console.log("before: " + score);
+    if (data.correct === true) {
+      score++;
+    }
+    console.log("after: " + score);
+    var answerSource = $('.answer-template').html();
+    var answerTemplate = _.template(answerSource);
     var compiledAnswerTemplate = answerTemplate({result: data.correct});
-    var $el = $(compiledAnswerTemplate);
+    var $elAnswer = $(compiledAnswerTemplate);
     $('#quizzes-display').empty();
-    $('#quizzes-display').append($el);
+    $('#quizzes-display').append($elAnswer);
+    if (questionID === lastQuestionID) {
+      console.log('that was the last question, your score: ' + score);
+      var scoreSource = "<h1>YO SCORE BE: <%= ttt %></h1>";
+      var scoreTemplate = _.template(scoreSource);
+      var compiledScoreTemplate = scoreTemplate({ttt: score});
+      console.log(compiledScoreTemplate);
+      var $elScore = $(compiledScoreTemplate);
+      $('#quizzes-display').empty();
+      $('#quizzes-display').append($elScore);
+    } else {
+      questionIterator++;
+      console.log('fff');
+      setTimeout(function() {
+        getQuestion(quizID, questionIterator, score);
+      }, 1000);
+    }
   });
-
-  // console.log(questionID, lastQuestionID);
-  if (questionID === lastQuestionID) {
-    console.log('that was the last question - returning true');
-    return true;
-  } else {
-    questionIterator++;
-    setTimeout(function() {
-      getQuestion(quizID, questionIterator);
-    }, 1000);
-  }
 });
 
 $(document).on('click', '.quiz', function() {
@@ -48,20 +60,22 @@ $(document).on('click', '.quiz', function() {
   var quizID = $(this).data("id");
   var url = "/quizzes/" + quizID + "/questions";
   var questionIterator = 0;
+  var score = 0;
   $.get(url, function(questionData) {
     // console.log(questionData);
     var compiledQuestionsTemplate = questionsTemplate({
       content: questionData,
       quizID: quizID,
-      questionIterator: questionIterator
+      questionIterator: questionIterator,
+      score: score
     });
     var $el = $(compiledQuestionsTemplate);
     $('#quizzes-display').append($el);
   });
 });
 
-var getQuestion = function(quizID, questionIterator) {
-  console.log('hello i am get you quesiton!');
+var getQuestion = function(quizID, questionIterator, score) {
+  // console.log('hello i am get you quesiton!');
   $('#quizzes-display').empty();
   var source = $('.question-template').html();
   var questionsTemplate = _.template(source);
@@ -71,7 +85,8 @@ var getQuestion = function(quizID, questionIterator) {
     var compiledQuestionsTemplate = questionsTemplate({
       content: questionData,
       quizID: quizID,
-      questionIterator: questionIterator
+      questionIterator: questionIterator,
+      score: score
     });
     var $el = $(compiledQuestionsTemplate);
     $('#quizzes-display').append($el);
