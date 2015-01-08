@@ -48,7 +48,6 @@ $(document).on('submit', '#form-submit', function(e) {
       questionIterator++;
       // console.log('fff');
       setTimeout(function() {
-        // getQuestion(quizID, questionIterator, score);
         getQuestion(quizID, questionIterator, score);
       }, 1000);
     }
