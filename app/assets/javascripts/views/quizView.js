@@ -7,11 +7,12 @@
     var $html = $(uncompiledTemplate({quizzes: this.quizzes}));
     $el.append($html);
 
-    var _view = this; //QUEST: this is supposed to be an element at this point? where is this coming from?
+    var _view = this;
     $html.children('.quiz').on('click', function() {
-      var id = $(this).data("id");
-      _view.destroy();
-      var questionsController = new Controller.QuestionsController(_view.element, questionsController.showFirstQuestion());
+      var quizID = $(this).data("id");
+      _view.element.empty();
+      var questionsController = new Controllers.Question(_view.element, quizID);
+      questionsController.showFirstQuestion();
     });
     $el.append($html);
   };

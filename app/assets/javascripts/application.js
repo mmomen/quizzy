@@ -15,7 +15,9 @@
 //= require turbolinks
 //= require underscore
 //= require models/quizModel
+//= require models/questionModel
 //= require views/quizView
+//= require views/questionView
 //= require controllers/quizController
 //= require controllers/QuestionController
 //= require app
