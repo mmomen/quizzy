@@ -10,7 +10,7 @@
     var questionIterator = 0;
     
     Models.Question.fetch(quizID, function(questions) {
-      console.log(questions);
+      // console.log(questions);
       var questionView = new Views.Question($el, questionIterator, questions[questionIterator]);
     });
   };

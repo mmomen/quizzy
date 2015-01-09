@@ -16,10 +16,13 @@
 //= require underscore
 //= require models/quizModel
 //= require models/questionModel
+//= require models/checkModel
 //= require views/quizView
 //= require views/questionView
+//= require views/checkView
 //= require controllers/quizController
 //= require controllers/QuestionController
+//= require controllers/checkController
 //= require app
 // 
 // Your Quizzy code should go here.

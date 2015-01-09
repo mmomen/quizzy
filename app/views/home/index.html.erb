@@ -25,9 +25,20 @@
 
 <script type="text/template" class="questions-template">
   <h2><%%= questionIterator + 1 %>: <%%= questions.question %></h2>
+  <form id='question-form' data-questioniterator='<%%= questionIterator %>' data-quizid='<%%= questions.quizID %>' data-questionid='<%%= questions.questionID %>'>
   <ul class='choices-block'>
-    <%% questions.choices.forEach(function(choice) { %>
-      <li class='choice'><input type="radio" name='<%%= questions.questionID %>'><%%= choice %></li>
+    <%% questions.choices.forEach(function(choice, index) { %>
+      <li class='choice'>
+        <input type="radio" name='<%%= questions.questionID %>' id='<%%= index %>' value='<%%= choice %>'>
+        <label for='<%%= index %>'><%%= choice %></label>
+      </li>
     <%% }) %>
   </ul>
+  <br>
+  <input type='submit' id='question-submit'>
+  </form>
+</script>
+
+<script type="text/template" class="result-template">
+  <h1><%%= result %></h1>
 </script>
