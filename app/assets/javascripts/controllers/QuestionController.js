@@ -25,7 +25,7 @@
 
     Models.Question.fetch(quizID, function(questions) {
       if (questions[questionIterator] === undefined) {
-        console.log("final: " + score);
+        var scoreView = new Views.Score($el, score);
       } else {
         var questionView = new Views.Question($el, questionIterator, questions[questionIterator], score);
       }

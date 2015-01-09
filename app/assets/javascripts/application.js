@@ -20,6 +20,7 @@
 //= require views/quizView
 //= require views/questionView
 //= require views/checkView
+//= require views/scoreView
 //= require controllers/quizController
 //= require controllers/QuestionController
 //= require controllers/checkController
