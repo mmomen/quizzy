@@ -1,7 +1,10 @@
 (function(){
-  var QuestionView = function($el, questionIterator, questions) {
+  var QuestionView = function($el, questionIterator, questions, score) {
     this.element = $el;
+    //where is this.questionIterator?
     this.questions = questions;
+    this.score = score;
+    // console.log("question view: " + score, this.score);
 
     var template = $('.questions-template').html();
     var uncompiledTemplate = _.template(template);
@@ -19,7 +22,7 @@
 
       _view.element.empty();
 
-      var checkAnswer = new Controllers.Check(_view.element, quizID, questionIterator, questionID, selected);
+      var checkAnswer = new Controllers.Check(_view.element, quizID, questionIterator, questionID, selected, _view.score);
       checkAnswer.showResult();
     });
   };

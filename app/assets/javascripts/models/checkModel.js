@@ -3,7 +3,7 @@
     this.correct = data.correct;
   };
 
-  Check.fetch = function(quizID, questionIterator, questionID, selected, cb) {
+  Check.fetch = function(quizID, questionIterator, questionID, selected, score, cb) {
     var checkURL = "/quizzes/" + quizID + "/questions/" + questionID + "/check?answer=" + selected;
 
     $.ajax({

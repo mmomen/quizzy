@@ -8,7 +8,7 @@
 
   //function to fetch quizzes
   Quiz.fetch = function(cb) {
-    $.ajax({ //QUEST: why generic ajax instead of a get request?
+    $.ajax({
       method: "GET",
       url: "/quizzes",
       success: function(quizzes) {
