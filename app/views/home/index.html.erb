@@ -3,9 +3,7 @@
     list-style-type: none;
   }
 </style>
-<h2>Quizzy Quiz</h2>
-
-<h3>PICK A QUIZ:</h3>
+<h1>Quizzy Quiz</h1><br>
 
 <div class="menu-display">
   <ol id="menu">
@@ -16,20 +14,36 @@
   
 </div>
 
-<script type="text/template" class="question-template">
-  <h3><%%= questionIterator + 1 %>: <%%= content[questionIterator].question %></h3>
-  <form id='form-submit' data-quizID="<%%= quizID %>" data-questioniterator="<%%= questionIterator %>" data-questionID="<%%= content[questionIterator].id %>" data-lastquestionid="<%%= content[content.length - 1].id %>" data-score="<%%= score %>">
-    <ul class='choices-block'>
-      <%% var options = content[questionIterator].choices.split(';') %>
-      <%% options.forEach(function(option, index) { %>
-        <%% var uniqueID = "question-" + content[questionIterator].id + "-choice-" + index %>
-        <li><input type='radio' name='question-<%%= content[questionIterator].id %>' value='<%%= option %>' id='<%%= uniqueID %>'><label for='<%%= uniqueID %>'><%%= option %></label></li>
-      <%% }) %>
-    </ul>
-    <br><input type='submit' id='question-submit'>
+<script type="text/template" class="quizzes-template">
+  <h2>YOU WANT QUIZ YOU GET QUIZ:</h2>
+  <ul>
+    <%% _.each(quizzes, function(quiz) { %>
+      <li class='quiz' data-id='<%%= quiz.id %>'><%%= quiz.title %></li>
+    <%% }) %>
+  </ul>
+</script>
+
+<script type="text/template" class="questions-template">
+  <h2><%%= questionIterator + 1 %>: <%%= questions.question %></h2>
+  <form id='question-form' data-questioniterator='<%%= questionIterator %>' data-quizid='<%%= questions.quizID %>' data-questionid='<%%= questions.questionID %>'>
+  <ul class='choices-block'>
+    <%% questions.choices.forEach(function(choice, index) { %>
+      <li class='choice'>
+        <input type="radio" name='<%%= questions.questionID %>' id='<%%= index %>' value='<%%= choice %>'>
+        <label for='<%%= index %>'><%%= choice %></label>
+      </li>
+    <%% }) %>
+  </ul>
+  <br>
+  <input type='submit' id='question-submit'>
   </form>
 </script>
 
-<script type="text/template" class="answer-template">
+<script type="text/template" class="result-template">
   <h1><%%= result %></h1>
+</script>
+
+<script type="text/template" class="score-template">
+  <h1>YOU SCORE: <%%= score %></h1>
+  <p>y u do diz?</p>
 </script>
