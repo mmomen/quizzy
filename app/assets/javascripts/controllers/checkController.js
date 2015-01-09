@@ -15,7 +15,7 @@
     var selected = this.selected;
 
     Models.Check.fetch(quizID, questionIterator, questionID, selected, function(data) {
-      var checkView = new Views.Check($el, data);
+      var checkView = new Views.Check($el, quizID, questionIterator, data);
     });
   };
 
