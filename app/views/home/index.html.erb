@@ -39,6 +39,12 @@
   </form>
 </script>
 
+<script type="text/template" class="create-quiz-template">
+  <form id='quiz-title'>
+    <label for="quiz-title">Quiz Title: </label><input type="text" id="quiz-title-input" name='quiz-title'>
+  </form>
+</script>
+
 <script type="text/template" class="result-template">
   <h1><%%= result %></h1>
 </script>
@@ -46,4 +52,10 @@
 <script type="text/template" class="score-template">
   <h1>YOU SCORE: <%%= score %></h1>
   <p>y u do diz?</p>
+</script>
+
+<script type="text/template" class="new-quiz-button-template">
+  <div id="create-display">
+    <button type="button" class="create-new-quiz">CLICK THIS BUTTON TO CREATE JAPANESE HAM SANDWICH (or a quiz)</button>
+  </div>
 </script>

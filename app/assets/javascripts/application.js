@@ -21,9 +21,11 @@
 //= require views/questionView
 //= require views/checkView
 //= require views/scoreView
+//= require views/createQuizView
 //= require controllers/quizController
 //= require controllers/QuestionController
 //= require controllers/checkController
+//= require controllers/createQuizController
 //= require app
 // 
 // Your Quizzy code should go here.
